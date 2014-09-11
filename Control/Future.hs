@@ -16,13 +16,12 @@ instance Applicative (Future a) where
 			fs' <- fs
 			as' <- as
 			return $ case (fs', as') of
-				(Nothing, _) -> Nothing
-				(_, Nothing) -> Nothing
 				(Just f, Just a) -> Just $ case (f, a) of
 					(Right f, Right a) -> Right $ f a
 					(Left f, Right _) -> Left f
 					(Right _, Left a) -> Left a
 					(Left f, Left a) -> Left (f ++ a)
+				_ -> Nothing
 
 instance Alternative (Future a) where
 	empty = Future $ return Nothing
@@ -32,6 +31,16 @@ instance Alternative (Future a) where
 			case as' of
 				Just (Right _) -> return as'
 				_ -> bs
+
+instance Monad (Future a) where
+	return = pure
+	Future m >>= f =
+		Future $ do
+			m' <- m
+			case m' of
+				Just (Right x) -> runFuture (f x)
+				Just (Left l) -> return (Just (Left l))
+				Nothing -> return Nothing
 
 -- | Wait until future comes, and modify failure history.
 forceFuture :: Future a b -> ([a] -> IO b) -> IO b
