@@ -1,7 +1,7 @@
 name:                future-resource
-version:             0.2.0.0
+version:             0.3.0.0
 synopsis:            realtime resource handling with manual concurrency
-description:         Lazy resource loading framework for GUI applications
+description:         Similar to async package, lazy resource loading framework for GUI applications
 license:             LGPL-3
 license-file:        LICENSE
 author:              capsjac
