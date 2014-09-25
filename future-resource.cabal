@@ -4,13 +4,17 @@ synopsis:            realtime resource handling with manual concurrency
 description:         Similar to async package, lazy resource loading framework for GUI applications
 license:             LGPL-3
 license-file:        LICENSE
-author:              capsjac
-maintainer:          capsjac
--- copyright:           
+author:              capsjac <capsjac at gmail dot com>
+maintainer:          capsjac <capsjac at gmail dot com>
+copyright:           (c) 2014 capsjac
 category:            Control
 build-type:          Simple
 -- extra-source-files:  
 cabal-version:       >=1.10
+
+source-repository head
+  type:              git
+  location:          https://github.com/capsjac/future-resource
 
 library
   exposed-modules:     Control.Future
